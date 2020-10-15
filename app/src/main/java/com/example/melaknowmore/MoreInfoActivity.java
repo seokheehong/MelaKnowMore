@@ -28,4 +28,17 @@ public class MoreInfoActivity extends AppCompatActivity {
             Log.d("ImplicitIntents", "Can't handle");
         }
     }
+
+    public void openBackgroundInfoWeb(View view) {
+        String url = "https://redcap.vanderbilt.edu/surveys/?s=LF9LFLFPHX";
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        else {
+            Log.d("ImplicitIntents", "Can't handle");
+        }
+    }
 }

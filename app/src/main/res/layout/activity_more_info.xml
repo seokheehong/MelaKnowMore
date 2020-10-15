@@ -11,6 +11,7 @@
         android:id="@+id/textView3"
         android:layout_width="67dp"
         android:layout_height="19dp"
+        android:gravity="center"
         android:text="More Info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,11 +23,39 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check out the American Cancer Society!"
+        android:gravity="center"
+        android:onClick="openWebsite"
+        android:text="Click here to check out the American Cancer Society!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.227" />
+
+    <Button
+        android:id="@+id/btn_BackgroundInfoWeb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openBackgroundInfoWeb"
+        android:text="Background Information"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.448" />
+
+    <TextView
+        android:id="@+id/tv_BackgroundInfoWeb"
+        android:layout_width="291dp"
+        android:layout_height="61dp"
+        android:gravity="center"
+        android:text="If you want a diagnosis, please fill out this background information form first!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.335" />
 </androidx.constraintlayout.widget.ConstraintLayout>
