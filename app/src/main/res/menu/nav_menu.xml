@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nmi_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home"
+        app:showAsAction="ifRoom|withText"
+        />
+    <item
+        android:id="@+id/nmi_tracker"
+        android:icon="@drawable/ic_tracker"
+        android:title="@string/tracker"
+        />
+    <item
+        android:id="@+id/nmi_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile"
+        />
+</menu>
