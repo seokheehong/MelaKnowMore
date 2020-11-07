@@ -7,6 +7,18 @@
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/textViewWelcome"
+        android:layout_width="375dp"
+        android:layout_height="139dp"
+        android:text="Welcome"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_navbar"
         android:layout_width="match_parent"
@@ -16,17 +28,17 @@
         app:itemTextColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/nav_menu"
-        tools:layout_editor_absoluteX="1dp"
-        />
+        tools:layout_editor_absoluteX="1dp" />
 
     <FrameLayout
         android:id="@+id/fl_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="411dp"
+        android:layout_height="482dp"
         app:layout_constraintBottom_toTopOf="@+id/bnv_navbar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

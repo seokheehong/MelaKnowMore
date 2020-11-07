@@ -1,20 +1,20 @@
 package com.example.melaknowmore;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.text.SimpleDateFormat;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,6 +32,47 @@ public class MainActivity extends AppCompatActivity {
         // set default loaded fragment to HOME
         Fragment defaultFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, defaultFragment).commit();
+
+        //--------------------------------------------------------------------------------------
+        // Login activities
+        TextView welcomeText = (TextView) findViewById(R.id.textViewWelcome);
+        Intent mainIntent = getIntent();
+
+        //create a shared preferences variable and associated editor
+        SharedPreferences loginInfo = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor loginEditor = loginInfo.edit();
+
+        // get the time and date to record log-in  ----------
+        long dateTime = System.currentTimeMillis();
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("MMM dd yyyy\nhh:mm a");
+        String dateTimeString = dateTimeFormat.format(dateTime);
+
+        //check if login already exists  ----------
+        //email is the key and logindate is the value
+        //TODO: get login name
+        String loginName = mainIntent.getStringExtra(LoginActivity.EXTRA_USER_NAME);
+        String passwordName = mainIntent.getStringExtra(LoginActivity.EXTRA_PASSWORD);
+
+        //TODO: load value from preferences (set default return value)
+        String nullReturnValue = "not here";
+        String lastLogin = loginInfo.getString(loginName, nullReturnValue);
+
+        //if exists, respond with last log-in information and update with new login info
+        //if doesn't exist, create new log-in
+        if (lastLogin == nullReturnValue){
+            //set welcome message
+            welcomeText.setText("First time login - welcome!\n");
+        }
+        else {
+            //set welcome message
+            welcomeText.setText("Welcome back " + loginName + "!\n\n Your last log-in was:\n"+ lastLogin);
+
+        }
+        // update log with new login time
+        //TODO
+        loginEditor.putString(loginName,dateTimeString);
+        loginEditor.apply();
+
     }
 
     public void goToTakePicture(View view) {

@@ -3,10 +3,12 @@ package com.example.melaknowmore;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -46,6 +48,16 @@ public class TakePictureActivity extends AppCompatActivity implements SensorEven
         displayLight = (TextView) findViewById(R.id.tv_light);
         graph = (GraphView) findViewById(R.id.graph);
 
+        // emailing the data
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+
+        emailIntent.putExtra(Intent.EXTRA_EMAIL  , new String[]{"Recipient"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT   , "Message Body");
+
+        // send email of the collected data
     }
 
     @Override
