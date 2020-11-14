@@ -80,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void goToContactDoctor(View view) {
+        Intent intent = new Intent(this, TakePictureActivity.class);
+        startActivity(intent);
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
