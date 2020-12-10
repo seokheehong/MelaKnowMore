@@ -49,10 +49,15 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void goToTracker(View view) {
-//        Intent intent = new Intent(this, TrackerActivity.class);
-//        startActivity(intent);
-//    }
+    public void goToTracker(View view) {
+        Intent intent = new Intent(this, TrackerActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToAboutUs(View view) {
+        Intent intent = new Intent(this, AboutUsActivity.class);
+        startActivity(intent);
+    }
 
     public void openACSWebsite(View view) {
         String url = "https://www.cancer.org/cancer/melanoma-skin-cancer.html";

@@ -99,32 +99,7 @@ public class TrackerFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_tracker, container, false);
 
-//        getActivity().setContentView(R.layout.activity_main);
-//
-//        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.imagegallery);
-//        recyclerView.setHasFixedSize(true);
-//
-//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(),2);
-//        recyclerView.setLayoutManager(layoutManager);
-//        ArrayList<CreateList> createLists = prepareData();
-//        MyAdapter adapter = new MyAdapter(getActivity().getApplicationContext(), createLists);
-//        recyclerView.setAdapter(adapter);
-
         return v;
     }
 
-
-
-
-//    private ArrayList<CreateList> prepareData(){
-//
-//        ArrayList<CreateList> theimage = new ArrayList<>();
-//        for(int i = 0; i< image_titles.length; i++){
-//            CreateList createList = new CreateList();
-//            createList.setImage_title(image_titles[i]);
-//            createList.setImage_ID(image_ids[i]);
-//            theimage.add(createList);
-//        }
-//        return theimage;
-//    }
 }

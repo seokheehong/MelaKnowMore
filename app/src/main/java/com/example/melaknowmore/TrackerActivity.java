@@ -1,39 +1,36 @@
-//package com.example.melaknowmore;
-//
-//import androidx.annotation.NonNull;
-//import androidx.appcompat.app.AppCompatActivity;
-//import androidx.recyclerview.widget.RecyclerView;
-//
-//import android.content.Intent;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.ImageView;
-//import android.widget.TextView;
-//
-//public class TrackerActivity extends RecyclerView.ViewHolder {
-//
-//    public ImageView imgThumbnail;
-//    public TextView tvNature;
-//    public TextView tvDesNature;
-//
-//    public TrackerActivity(View itemView) {
-//        super(itemView);
-//        imgThumbnail = (ImageView)itemView.findViewById(R.id.img_thumbnail);
-//        tvNature = (TextView)itemView.findViewById(R.id.tv_nature);
-//        tvDesNature = (TextView)itemView.findViewById(R.id.tv_des_nature);
-//        itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                v.getContext().startActivity(new Intent(v.getContext(),CardInfo.class));
-//
-//            }
-//        });
-//    }
-//
-////    @Override
-////    protected void onCreate(Bundle savedInstanceState) {
-////        super.onCreate(savedInstanceState);
-////        setContentView(R.layout.activity_tracker);
-////    }
-//}
+package com.example.melaknowmore;
+
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+public class TrackerActivity extends AppCompatActivity {
+
+    RecyclerView recyclerView;
+    Adapter adapter;
+    ArrayList<String> items;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_tracker);
+
+        items = new ArrayList<>();
+        items.add("First CardView Item");
+        items.add("Second CardView Item");
+        items.add("Third CardView Item");
+        items.add("Fourth CardView Item");
+        items.add("Fifth CardView Item");
+        items.add("Sixth CardView Item");
+
+        recyclerView = findViewById(R.id.lo_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new Adapter(this, items);
+        recyclerView.setAdapter(adapter);
+
+    }
+}

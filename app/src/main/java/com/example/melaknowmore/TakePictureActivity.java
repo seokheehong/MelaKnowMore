@@ -2,6 +2,7 @@ package com.example.melaknowmore;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,12 +30,15 @@ import static androidx.core.content.FileProvider.*;
 
 public class TakePictureActivity extends AppCompatActivity {
 
+    public static final String EXTRA_PHOTO_PATH = "com.example.melaknowmore.EXTRA_PHOTO_PATH";
+
     static final int REQUEST_IMAGE_CAPTURE = 100;
     static final int REQUEST_TAKE_PHOTO = 1;
     static final String TAG = "Camera Activity";
     private ImageView thumbnail, fullImage;
-    private String currentPhotoPath;
+    private String currentPhotoPath, finalPhotoPath;
     private TextView filename;
+    Button goToTrackerBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +49,8 @@ public class TakePictureActivity extends AppCompatActivity {
 //        thumbnail = (ImageView) findViewById(R.id.iv_thumbnail);
         fullImage = (ImageView) findViewById(R.id.iv_fullImage);
 
+        goToTrackerBTN = (Button) findViewById(R.id.btn_goToTracker);
+        goToTrackerBTN.setVisibility(View.GONE);
         ImageButton photoBtn = (ImageButton) findViewById(R.id.btn_takePicture);
         Log.d(TAG, "activity created");
     }
@@ -109,38 +116,24 @@ public class TakePictureActivity extends AppCompatActivity {
         }
         Log.d(TAG, "exit onActivityResult");
 
-        // -------------- Save the file to internal directory ---------------
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/com.example.melaknowmore/app_imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageName = timeStamp + ".jpg";
-        File mypath=new File(directory,imageName);
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            Bitmap imageBitmap = BitmapFactory.decodeFile(currentPhotoPath);
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-            Log.d(TAG, "saved image sucessfully");
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.d(TAG, "fail 1");
-        } finally {
-            try {
-                fos.close();
-                Log.d(TAG, "fos closed");
-            } catch (IOException e) {
-                e.printStackTrace();
-                Log.d(TAG, "fail 2");
+        // SAVE THE IMAGE
+        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == RESULT_OK) {
+            goToTrackerBTN.setVisibility(View.VISIBLE);
+            if (resultCode == Activity.RESULT_OK) {
+                File f = new File (currentPhotoPath);
+                fullImage.setImageURI(Uri.fromFile(f));
+                Log.d("TAG", "The absolute URL of image is " + Uri.fromFile(f));
+                //finalPhotoPath = Uri.fromFile(f).toString();
+                // save to gallery
+                Intent mediaScanIntent = new Intent (Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                Uri contentUri = Uri.fromFile(f);
+                mediaScanIntent.setData(contentUri);
+                this.sendBroadcast(mediaScanIntent);
             }
         }
-
         // Display toast message
         Context context = getApplicationContext();
-        CharSequence text = "Your image has been saved automatically!";
+        CharSequence text = "Your image has been saved automatically to your gallery!";
         int duration = Toast.LENGTH_SHORT;
         Toast.makeText(context, text, duration).show();
     }
@@ -149,7 +142,10 @@ public class TakePictureActivity extends AppCompatActivity {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES); // saves the files to a private location
+        //File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); // allows app to save pictures to gallery
+        // the line above does not work due to deprecation of the method for android sdk 29 and up
         File image = File.createTempFile(
                 imageFileName,  ///* prefix */
                 ".jpg",  //       /* suffix */
@@ -161,4 +157,11 @@ public class TakePictureActivity extends AppCompatActivity {
 
         return image;
     }
+
+    public void goToTracker(View view) {
+        Intent intent = new Intent(this, TrackerActivity.class);
+        intent.putExtra(EXTRA_PHOTO_PATH, finalPhotoPath);
+        startActivity(intent);
+    }
+
 }

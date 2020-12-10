@@ -35,6 +35,18 @@
         <item name="android:textAlignment">textStart</item>
         <item name="android:fontFamily">@font/andada</item>
     </style>
+    <style name="textCardTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#2B2B2B</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:fontFamily">@font/andada</item>
+    </style>
+    <style name="textCardDescription" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#2B2B2B</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:fontFamily">@font/andada</item>
+    </style>
 
     <!-- Button Styles -->
     <style name="buttonPrimary" parent="TextAppearance.AppCompat">
