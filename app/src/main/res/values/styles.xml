@@ -1,10 +1,59 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!--   color for the app bar and other primary UI elements -->
         <item name="colorPrimary">@color/colorPrimary</item>
+        <!--   a darker variant of the primary color, used for
+       the status bar (on Android 5.0+) and contextual app bars -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--   a secondary color for controls like checkboxes and text fields -->
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <!-- Text Styles -->
+    <style name="textTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#2B2B2B</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/andada</item>
+    </style>
+    <style name="textBody" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#2B2B2B</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/andada</item>
+    </style>
+    <style name="textBody2" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#2B2B2B</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/andada</item>
+    </style>
+    <style name="textHint" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#2B2B2B</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:fontFamily">@font/andada</item>
+    </style>
+
+    <!-- Button Styles -->
+    <style name="buttonPrimary" parent="TextAppearance.AppCompat">
+        <item name="android:background">#FFFFFF</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/andada</item>
+        <item name="android:height">100dp</item>
+        <item name="android:width">300dp</item>
+    </style>
+
+
+    <style name="buttonSecondary" parent="TextAppearance.AppCompat">
+        <item name="android:background">#AC9AEF</item>
+        <item name="android:textColor">#2B2B2B</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
 
 </resources>

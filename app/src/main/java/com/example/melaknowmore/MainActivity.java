@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.SimpleDateFormat;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -33,59 +37,50 @@ public class MainActivity extends AppCompatActivity {
         Fragment defaultFragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_container, defaultFragment).commit();
 
-        //--------------------------------------------------------------------------------------
-        // Login activities
-        TextView welcomeText = (TextView) findViewById(R.id.textViewWelcome);
-        Intent mainIntent = getIntent();
-
-        //create a shared preferences variable and associated editor
-        SharedPreferences loginInfo = this.getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor loginEditor = loginInfo.edit();
-
-        // get the time and date to record log-in  ----------
-        long dateTime = System.currentTimeMillis();
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("MMM dd yyyy\nhh:mm a");
-        String dateTimeString = dateTimeFormat.format(dateTime);
-
-        //check if login already exists  ----------
-        //email is the key and logindate is the value
-        //TODO: get login name
-        String loginName = mainIntent.getStringExtra(LoginActivity.EXTRA_USER_NAME);
-        String passwordName = mainIntent.getStringExtra(LoginActivity.EXTRA_PASSWORD);
-
-        //TODO: load value from preferences (set default return value)
-        String nullReturnValue = "not here";
-        String lastLogin = loginInfo.getString(loginName, nullReturnValue);
-
-        //if exists, respond with last log-in information and update with new login info
-        //if doesn't exist, create new log-in
-        if (lastLogin == nullReturnValue){
-            //set welcome message
-            welcomeText.setText("First time login - welcome!\n");
-        }
-        else {
-            //set welcome message
-            welcomeText.setText("Welcome back " + loginName + "!\n\n Your last log-in was:\n"+ lastLogin);
-
-        }
-        // update log with new login time
-        //TODO
-        loginEditor.putString(loginName,dateTimeString);
-        loginEditor.apply();
-
     }
 
-    public void goToTakePicture(View view) {
-        Intent intent = new Intent(this, TakePictureActivity.class);
+    public void gotoPreparePicture(View view) {
+        Intent intent = new Intent(this, PreparePictureActivity.class);
         startActivity(intent);
     }
 
     public void goToContactDoctor(View view) {
-        Intent intent = new Intent(this, TakePictureActivity.class);
+        Intent intent = new Intent(this, ContactDoctorActivity.class);
         startActivity(intent);
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new BottomNavigationView.OnNavigationItemSelectedListener() {
+//    public void goToTracker(View view) {
+//        Intent intent = new Intent(this, TrackerActivity.class);
+//        startActivity(intent);
+//    }
+
+    public void openACSWebsite(View view) {
+        String url = "https://www.cancer.org/cancer/melanoma-skin-cancer.html";
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        else {
+            Log.d("ImplicitIntents", "Can't handle");
+        }
+    }
+
+    public void openBackgroundInfoWeb(View view) {
+        String url = "https://redcap.vanderbilt.edu/surveys/?s=LF9LFLFPHX";
+        Uri webpage = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+        else {
+            Log.d("ImplicitIntents", "Can't handle");
+        }
+    }
+
+    private final BottomNavigationView.OnNavigationItemSelectedListener bottomNavMethod = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -110,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
-
 
 //    private Toolbar myToolbar;
 //
